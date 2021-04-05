@@ -22,11 +22,5 @@ public class Point {
         Point b = new Point(0, 2);
         double dist = a.distance(b);
         System.out.println(dist);
-        Point c = new Point(2, 5);
-        Point d = new Point(7, 9);
-        System.out.println("Между точками (" + c.x + "," + c.y + ") и (" + d.x + "," + d.y + ") расстояние " + c.distance(d));
-        Point e = new Point(1, 3);
-        Point f = new Point(4, 6);
-        System.out.println("Между точками (" + e.x + "," + e.y + ") и (" + f.x + "," + f.y + ") расстояние " + e.distance(f));
     }
 }
