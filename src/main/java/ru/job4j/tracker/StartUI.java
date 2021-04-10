@@ -14,7 +14,7 @@ public class StartUI {
         tracker.add(itemt);
         for (Item s : tracker.findAll())
             System.out.println(s.getId() + " " + s.getName());
-        System.out.println("-------------");
+        System.out.println("------------");
         for (Item s : tracker.findByName("First"))
             System.out.println(s.getId() + " " + s.getName());
     }
