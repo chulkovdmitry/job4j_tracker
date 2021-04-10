@@ -9,9 +9,13 @@ public class StartUI {
         Item itemtoo = new Item();
         itemtoo.setName("Second");
         tracker.add(itemtoo);
+        Item itemt = new Item();
+        itemt.setName("First");
+        tracker.add(itemt);
         for (Item s : tracker.findAll())
             System.out.println(s.getId() + " " + s.getName());
         System.out.println("-------------");
-        System.out.println(tracker.findById(1).getId() + " " + tracker.findById(1).getName());
+        for (Item s : tracker.findByName("First"))
+            System.out.println(s.getId() + " " + s.getName());
     }
 }
