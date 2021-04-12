@@ -8,10 +8,13 @@ public class Matches {
         System.out.println("Игра 11.");
         boolean turn = true;
         int count = 11;
+        int matches;
         while (count > 0) {
             String player = turn ? "Первый игрок" : "Второй игрок";
-            System.out.println(player + " введите число от 1 до 3:");
-            int matches = Integer.parseInt(input.nextLine());
+            do {
+                System.out.println(player + " введите число от 1 до 3:");
+                matches = Integer.parseInt(input.nextLine());
+            } while (matches > 3 || matches < 1);
             turn = !turn;
             count -= matches;
             System.out.println("Спичек осталось: " + count);
