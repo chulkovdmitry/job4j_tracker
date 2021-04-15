@@ -34,15 +34,14 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("deleted item");
+        Item item = new Item();
         tracker.add(item);
+        int id = item.getId();
         String[] answers = {
-                String.valueOf(item.getId()),
-                "deleted item"
+                String.valueOf(id)
         };
         StartUI.deleteItem(new StubInput(answers), tracker);
-        Item deleted = tracker.findById(item.getId());
         String s = null;
-        assertThat(deleted, is(s));
+        assertThat(tracker.findById(id), is(s));
     }
 }
