@@ -20,7 +20,7 @@ public class StartUI {
         }
     }
 
-    public static void deteleItem(Input input, Tracker tracker) {
+    public static void deleteItem(Input input, Tracker tracker) {
         int itnum = input.askInt("Enter number of item to delete: ");
         if (tracker.delete(itnum)) {
             System.out.println("Deleting successful!");
@@ -72,7 +72,7 @@ public class StartUI {
             } else if (select == 2) {
                 StartUI.replaceItem(input, tracker);
             } else if (select == 3) {
-                StartUI.deteleItem(input, tracker);
+                StartUI.deleteItem(input, tracker);
             } else if (select == 4) {
                 StartUI.findByIdItem(input, tracker);
             } else if (select == 5) {
