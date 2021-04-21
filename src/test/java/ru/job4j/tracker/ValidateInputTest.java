@@ -50,10 +50,10 @@ public class ValidateInputTest {
     public void whenNegativeInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[]{"-2", "2"}
+                new String[]{"-2"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
-        assertThat(selected, is(2));
+        assertThat(selected, is(-2));
     }
 }
