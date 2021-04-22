@@ -1,13 +1,21 @@
 package ru.job4j.tracker;
 
 public class SingleTracker {
-    private Tracker tracker = new Tracker();
-    private static final SingleTracker instance = null;
 
-    public static void main(String[] args) {
-        Log4File log = Log4File.getInstance();
-        log.add("add new Item");
-        log.save();
+    private static int count;
+    private static final SingleTracker INSTANCE = new SingleTracker();
+    private Tracker tracker = new Tracker();
+
+    private SingleTracker() {
+        count++;
+    }
+
+    public static SingleTracker getInstance() {
+        return INSTANCE;
+    }
+
+    public static int getAmountOfInstance() {
+        return count;
     }
 
     public Item add(Item item) {
