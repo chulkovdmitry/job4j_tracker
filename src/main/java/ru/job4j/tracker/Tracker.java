@@ -9,7 +9,7 @@ public class Tracker {
     private final List<Item> items = new ArrayList<>();
     //private int size = 0;
     private int ids = 1;
-    private int size = items.size();
+    //private int size = items.size();
 
     public boolean delete(int id) {
         int index = indexOf(id);
@@ -49,7 +49,7 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
     public List<Item> findByName(String key) {
