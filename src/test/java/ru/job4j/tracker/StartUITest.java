@@ -17,9 +17,6 @@ public class StartUITest {
                 new String[]{"999", "0"}
         );
         Tracker tracker = new Tracker();
-        //UserAction[] actions = new UserAction[]{
-        //        new ExitAction()
-        //};
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
@@ -41,10 +38,6 @@ public class StartUITest {
                 new String[]{"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
-        //UserAction[] actions = {
-        //        new CreateAction(out),
-        //        new ExitAction()
-        //};
         List<UserAction> actions = new ArrayList<>();
         actions.add(new CreateAction(out));
         actions.add(new ExitAction());
@@ -59,10 +52,6 @@ public class StartUITest {
                 new String[]{"0", "1"}
         );
         Tracker tracker = new Tracker();
-        //UserAction[] actions = {
-        //        new FindAllAction(out),
-        //        new ExitAction()
-        //};
         List<UserAction> actions = new ArrayList<>();
         actions.add(new FindAllAction(out));
         actions.add(new ExitAction());
@@ -84,10 +73,6 @@ public class StartUITest {
                 new String[]{"0", "1", "1"}
         );
         Tracker tracker = new Tracker();
-        //UserAction[] actions = {
-        //        new FindByIdAction(out),
-        //        new ExitAction()
-        //};
         List<UserAction> actions = new ArrayList<>();
         actions.add(new FindByIdAction(out));
         actions.add(new ExitAction());
@@ -110,10 +95,6 @@ public class StartUITest {
                 new String[]{"0", "1", "1"}
         );
         Tracker tracker = new Tracker();
-        //UserAction[] actions = {
-        //        new FindByNameAction(out),
-        //        new ExitAction()
-        //};
         List<UserAction> actions = new ArrayList<>();
         actions.add(new FindByNameAction(out));
         actions.add(new ExitAction());
@@ -136,9 +117,6 @@ public class StartUITest {
                 new String[]{"0"}
         );
         Tracker tracker = new Tracker();
-        //UserAction[] actions = {
-        //        new ExitAction()
-        //};
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
