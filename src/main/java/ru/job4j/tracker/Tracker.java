@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Tracker {
     private final List<Item> items = new ArrayList<>();
-    private int ids = 1;
 
     public boolean delete(int id) {
         int index = indexOf(id);
