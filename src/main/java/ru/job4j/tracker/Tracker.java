@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Tracker {
     private final List<Item> items = new ArrayList<>();
+    private int ids = 1;
 
     public boolean delete(int id) {
         int index = indexOf(id);
@@ -37,7 +38,7 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
     public List<Item> findByName(String key) {
