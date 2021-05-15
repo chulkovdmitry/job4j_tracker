@@ -1,5 +1,7 @@
 package ru.job4j.bank;
 
+import ru.job4j.collection.Order;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,9 +41,10 @@ public class BankService {
         Account account = null;
         if (user != null) {
             List<Account> accounts = users.get(user);
-            int index = accounts.indexOf(new Account(requisite, 0));
-            if (index != -1) {
-                account = accounts.get(index);
+            for (Account account1 : accounts) {
+                if (account1.getRequisite().equals(requisite)) {
+                    account = account1;
+                }
             }
         }
         return account;
