@@ -4,8 +4,7 @@ import org.junit.Test;
 
 import java.util.Comparator;
 
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class JobTest {
@@ -65,9 +64,9 @@ public class JobTest {
         Comparator<Job> cmpNamePriority = new JobAscByPriority()
                 .thenComparing(new JobDescByName());
         int rsl = cmpNamePriority.compare(
-                new Job("Impl task", 0),
+                new Job("Fix bug", 0),
                 new Job("Fix bug", 0)
         );
-        assertThat(rsl, lessThan(0));
+        assertThat(rsl, equalTo(0));
     }
 }
