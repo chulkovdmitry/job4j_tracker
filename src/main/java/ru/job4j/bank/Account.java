@@ -2,6 +2,13 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс содержит в себе шаблон с полями для создания объекта Account.
+ * Поля инкапсулированы, методы equals и hashCode перезаписаны.
+ *
+ * @author NN
+ * @version 1.0
+ */
 public class Account {
     private String requisite;
     private double balance;
