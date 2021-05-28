@@ -4,20 +4,34 @@ import java.util.*;
 
 public class FreezeStr {
     public static boolean eq(String left, String right) {
-        int i = 1;
-        List<String> first = Arrays.asList(left.split(""));
-        List<String> second = Arrays.asList(right.split(""));
-        Collections.sort(first);
-        Collections.sort(second);
-        Map<Integer, String> hashMapFirst = new HashMap<>();
-        for (String str : first) {
-            hashMapFirst.put(i++, str);
+        boolean result = true;
+        int count = 1;
+        char[] leftToArray = left.toCharArray();
+        char[] rightToArray = right.toCharArray();
+        HashMap<Character, Integer> first = new HashMap();
+        for (int i = 0; i < leftToArray.length; i++) {
+            if (!first.containsKey(leftToArray[i])) {
+                first.putIfAbsent(leftToArray[i], count);
+            } else {
+                Integer co = first.get(leftToArray[i]) + 1;
+                first.put(leftToArray[i], co);
+            }
         }
-        i = 1;
-        Map<Integer, String> hashMapSecond = new HashMap<>();
-        for (String str : second) {
-            hashMapSecond.put(i++, str);
+        for (int i = 0; i < rightToArray.length; i++) {
+            Integer co = first.get(rightToArray[i]);
+            if (!first.containsKey(rightToArray[i])) {
+                result = false;
+                break;
+            }
+            if (first.containsKey(rightToArray[i]) && co > 0) {
+                first.put(rightToArray[i], co - 1);
+            } else {
+                first.remove(rightToArray[i], co);
+                result = false;
+                break;
+            }
         }
-        return hashMapFirst.equals(hashMapSecond);
+
+        return result;
     }
 }

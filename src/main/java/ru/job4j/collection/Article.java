@@ -6,8 +6,7 @@ import java.util.HashSet;
 public class Article {
     public static boolean generateBy(String origin, String line) {
         HashSet<String> orig =
-                new HashSet<>(Arrays.asList(origin.replaceAll("[,.!:;]",
-                        "").split(" ")));
+                new HashSet<>(Arrays.asList(origin.replaceAll("\\p{P}", "").split(" ")));
         HashSet<String> copy = new HashSet<>(Arrays.asList(line.split(" ")));
         for (String str : copy) {
             if (!orig.contains(str)) {
