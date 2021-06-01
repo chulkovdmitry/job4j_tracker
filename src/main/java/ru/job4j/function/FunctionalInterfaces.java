@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.*;
 
 public class FunctionalInterfaces {
+
     public static void main(String[] args) {
 
         Map<Integer, String> map = new HashMap<>();
@@ -24,17 +25,18 @@ public class FunctionalInterfaces {
         BiPredicate<Integer, String> biPred = (in, s) -> (in % 2 == 0 ||
                 map.get(in).length() == 4);
         for (Integer i : map.keySet()) {
-            if (i % 2 == 0 || map.get(i).length() == 4) {
+            if (biPred.test(i, map.get(i))) {
                 System.out.println("key: " + i + " value: " + map.get(i));
             }
         }
-
         Supplier<List<String>> sup = () -> new ArrayList<>(map.values());
-        List<String> strings = new ArrayList<>(map.values());
+
         Consumer<String> con = (sс) -> System.out.println(sс);
+
         Function<String, String> func = (fs) -> fs.toUpperCase();
-        for (String s : strings) {
-            System.out.println(s.toUpperCase());
+
+        for (String str : sup.get()) {
+            con.accept(func.apply(str));
         }
     }
 }
