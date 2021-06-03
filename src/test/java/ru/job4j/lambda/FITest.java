@@ -21,8 +21,8 @@ public class FITest {
     @Test
     public void whenQuadFunctionThenQuadResults() {
         FI function = new FI();
-        List<Double> result = function.diapason(5, 8, x -> ((2 * x) * (2 * x)) + (1 * x) + 0);
-        List<Double> expected = Arrays.asList(105D, 150D, 203D);
+        List<Double> result = function.diapason(5, 8, x -> x * x);
+        List<Double> expected = Arrays.asList(25D, 36D, 49D);
         assertThat(result, is(expected));
     }
 
