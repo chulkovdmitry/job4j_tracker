@@ -53,7 +53,7 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        var persons = phones.find("Ivan");
+        ArrayList<Person> persons = phones.find("Ivan");
         assertThat(0, is(persons.size()));
     }
 }
