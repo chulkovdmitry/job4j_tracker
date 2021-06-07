@@ -7,8 +7,8 @@ import java.util.Comparator;
 public class Profiles {
     public List<Address> collect(List<Profile> profiles) {
         return profiles.stream()
-                .sorted(Comparator.comparing(ad -> ad.getAddress().getCity()))
                 .map(Profile::getAddress)
+                .sorted(Comparator.comparing(Address::getCity))
                 .distinct()
                 .collect(Collectors.toList());
     }
