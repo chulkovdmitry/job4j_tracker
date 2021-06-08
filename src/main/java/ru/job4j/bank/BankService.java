@@ -67,7 +67,6 @@ public class BankService {
      */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
-        //Account account = null;
         if (user != null) {
             return users.get(user)
                     .stream().
