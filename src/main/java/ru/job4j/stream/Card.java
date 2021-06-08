@@ -11,10 +11,18 @@ public class Card {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suit=" + suit +
+                ", value=" + value +
+                '}';
+    }
+
     public static void main(String[] args) {
         Stream.of((Suit.values()))
                 .flatMap(l -> Stream.of(Value.values())
-                        .map(value1 -> l + " " + value1))
+                        .map(value1 -> new Card(l, value1)))
                 .forEach(System.out::println);
     }
 }
