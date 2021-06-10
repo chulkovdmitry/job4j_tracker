@@ -3,10 +3,7 @@ package ru.job4j.bank;
 import ru.job4j.collection.Order;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Класс описывает работу банковского счета.
@@ -36,9 +33,9 @@ public class BankService {
      * @param account account который создается.
      */
     public void addAccount(String passport, Account account) {
-        User user = findByPassport(passport);
-        if (user != null) {
-            List<Account> accounts = users.get(user);
+        Optional<User> user = findByPassport(passport);
+        if (user.isPresent()) {
+            List<Account> accounts = users.get(user.get());
             if (!accounts.contains(account)) {
                 accounts.add(account);
             }
@@ -47,34 +44,33 @@ public class BankService {
 
     /**
      * Метод принимает данные паспорта и производит поиск user.
+     *
      * @param passport данные паспорта по которым производится поиск пользователя.
      * @return возвращает найденного пользователя или null если пользоваель c таим паспортом не существует.
      */
-    public User findByPassport(String passport) {
-        return users.keySet()
-                .stream()
+    public Optional<User> findByPassport(String passport) {
+        return users.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     /**
      * Метод принимает данные паспорта и номера счета и производит поиск пользователя по этим данным.
-     * @param passport данные паспорта по которым производится поиск user.
+     *
+     * @param passport  данные паспорта по которым производится поиск user.
      * @param requisite реквизиты счета по которым производится поиск.
      * @return возвращает найденный account или null если user с таким паспортом не найден
      * или если account с такимим реквизитами не существует.
      */
-    public Account findByRequisite(String passport, String requisite) {
-        User user = findByPassport(passport);
-        if (user != null) {
-            return users.get(user)
-                    .stream().
-                            filter(account -> account.getRequisite().equals(requisite))
-                    .findFirst()
-                    .orElse(null);
+    public Optional<Account> findByRequisite(String passport, String requisite) {
+        var user = findByPassport(passport);
+        Optional<Account> rsl = Optional.empty();
+        if (user.isPresent()) {
+            rsl = users.get(user.get()).stream()
+                    .filter(elem -> elem.getRequisite().equals(requisite))
+                    .findFirst();
         }
-        return null;
+        return rsl;
     }
 
     /**
@@ -91,11 +87,15 @@ public class BankService {
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
-        Account srcAccount = findByRequisite(srcPassport, srcRequisite);
-        Account destAccount = findByRequisite(destPassport, destRequisite);
-        if (srcAccount != null && destAccount != null && (srcAccount.getBalance() - amount) >= 0) {
-            srcAccount.setBalance(srcAccount.getBalance() - amount);
-            destAccount.setBalance(destAccount.getBalance() + amount);
+        Optional<Account> srcAccount = findByRequisite(srcPassport, srcRequisite);
+        Optional<Account> destAccount = findByRequisite(destPassport, destRequisite);
+        if (
+                srcAccount.isPresent()
+                        && destAccount.isPresent()
+                        && (srcAccount.get().getBalance() - amount) >= 0
+        ) {
+            srcAccount.get().setBalance(srcAccount.get().getBalance() - amount);
+            destAccount.get().setBalance(destAccount.get().getBalance() + amount);
             rsl = true;
         }
         return rsl;
