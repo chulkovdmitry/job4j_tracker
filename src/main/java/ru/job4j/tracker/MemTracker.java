@@ -4,9 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Tracker {
-    private final List<Item> items = new ArrayList<>();
-    private int ids = 1;
+public class MemTracker implements Store {
+    private final List<Item> items;
+    private int ids;
+
+    public MemTracker() {
+        items = new ArrayList<>();
+        init();
+    }
+
+    @Override
+    public void init() {
+        ids = 1;
+    }
 
     public boolean delete(int id) {
         int index = indexOf(id);
@@ -60,5 +70,9 @@ public class Tracker {
     public Item findById(int id) {
         int index = indexOf(id);
         return index != -1 ? items.get(index) : null;
+    }
+
+    @Override
+    public void close() throws Exception {
     }
 }

@@ -10,50 +10,44 @@ public class StartUI {
         this.out = out;
     }
 
-    //    public void init(Input input, Tracker tracker, UserAction[] actions) {
-    public void init(Input input, Tracker tracker, List<UserAction> actions) {
+    public void init(Input input, Store tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
             int select = input.askInt("Select: ");
-            //    if (select < 0 || select >= actions.length) {
-            //        out.println("Wrong input, you can select: 0 .. " + (actions.length - 1));
-            if (select < 0 || select >= actions.size()) {
-                out.println("Wrong input, you can select: 0 .. " + (actions.size() - 1));
+            if (select < 0 || select >= actions.length) {
+                out.println("Wrong input, you can select: 0 .. " + (actions.length - 1));
                 continue;
             }
-            //    UserAction action = actions[select];
-            UserAction action = actions.set(select, actions.get(select));
+            UserAction action = actions[select];
             run = action.execute(input, tracker);
         }
     }
 
-    //private void showMenu(UserAction[] actions) {
-    private void showMenu(List<UserAction> actions) {
+    private void showMenu(UserAction[] actions) {
         out.println("Menu.");
-        //for (int index = 0; index < actions.length; index++) {
-        //    out.println(index + ". " + actions[index].name());
-        for (int i = 0; i < actions.size(); i++) {
-            out.println(i + ". " + actions.get(i).name());
+        int i = 0;
+        for (UserAction show : actions) {
+            out.println(i++ + ". " + show.name());
         }
     }
 
     public static void main(String[] args) {
-        Output output = new ConsoleOutput();
-        Input input = new ValidateInput(output, new ConsoleInput());
-        Tracker tracker = new Tracker();
-        //UserAction[] actions = {
-        //        new CreateAction(output), new FindAllAction(output), new ReplaceAction(output),
-        //        new DeleteAction(output), new FindByIdAction(output), new FindByNameAction(output), new ExitAction()
-        //};
-        List<UserAction> actions = new ArrayList<>();
-        actions.add(new CreateAction(output));
-        actions.add(new FindAllAction(output));
-        actions.add(new ReplaceAction(output));
-        actions.add(new DeleteAction(output));
-        actions.add(new FindByNameAction(output));
-        actions.add(new FindByIdAction(output));
-        actions.add(new ExitAction());
-        new StartUI(output).init(input, tracker, actions);
+        Input validate = new ValidateInput(new ConsoleOutput(), new ConsoleInput());
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            UserAction[] actions = {
+                    new CreateAction(new ConsoleOutput()),
+                    new FindAllAction(new ConsoleOutput()),
+                    new ReplaceAction(new ConsoleOutput()),
+                    new DeleteAction(new ConsoleOutput()),
+                    new FindByIdAction(new ConsoleOutput()),
+                    new FindByNameAction(new ConsoleOutput()),
+                    new ExitAction()
+            };
+            new StartUI(new ConsoleOutput()).init(validate, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
