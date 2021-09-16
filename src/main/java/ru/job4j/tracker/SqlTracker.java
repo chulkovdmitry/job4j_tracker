@@ -34,6 +34,11 @@ public class SqlTracker implements Store {
             ps.setString(1, item.getName());
             ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
             ps.execute();
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(generatedKeys.getInt(1));
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
