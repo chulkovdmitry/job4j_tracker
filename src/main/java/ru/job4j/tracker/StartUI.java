@@ -49,6 +49,7 @@ public class StartUI {
             tracker.init();
             UserAction[] actions = {
                     new CreateAction(new ConsoleOutput()),
+                    new CreateManyAction(new ConsoleOutput()),
                     new FindAllAction(new ConsoleOutput()),
                     new ReplaceAction(new ConsoleOutput()),
                     new DeleteAction(new ConsoleOutput()),
