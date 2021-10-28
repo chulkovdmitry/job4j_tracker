@@ -25,7 +25,6 @@ public class SqlTrackerTest {
                 class.getClassLoader().getResourceAsStream("test.properties")) {
             Properties config = new Properties();
             config.load(in);
-            //Class.forName(config.getProperty("driver-class-name"));
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(
                     config.getProperty("url"),
