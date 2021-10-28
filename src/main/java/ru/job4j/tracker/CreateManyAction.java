@@ -32,7 +32,7 @@ public class CreateManyAction implements UserAction {
         Item item = new Item(name);
         System.out.println("Size before creation");
         info();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100; i++) {
             memtracker.add(item);
         }
         System.out.println("Size after creation");
