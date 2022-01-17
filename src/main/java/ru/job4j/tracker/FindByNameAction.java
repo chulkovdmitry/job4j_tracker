@@ -25,16 +25,7 @@ public class FindByNameAction implements UserAction {
         } else {
             out.println("items name NOT FOUND");
         }
-/*        Item[] array = tracker.findByName(itkey);
-        if (array.length == 0) {
-            out.println("Items with this name not found!");
-        } else {
-            out.println("Items with this name FOUND!");
-            for (Item item : array) {
-                out.println(item);
-            }
-        }
- */
+
         return true;
     }
 }
